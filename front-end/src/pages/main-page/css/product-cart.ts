@@ -29,7 +29,7 @@ export const ProductCartContainer = styled.div`
   .product_description {
     margin-top: 7px;
     color: ${({ theme }) => theme.text.greyDark};
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .product_price {
