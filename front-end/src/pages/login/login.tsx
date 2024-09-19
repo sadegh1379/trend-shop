@@ -9,11 +9,9 @@ import { RootState } from "state-manager/store";
 import { LoginContainer } from "./css/login.style";
 
 const Login: FC = () => {
-  const {
-    token: userToken,
-    seenTours,
-    userInfo,
-  } = useSelector((state: RootState) => state.profile);
+  const { token: userToken, userInfo } = useSelector(
+    (state: RootState) => state.profile
+  );
   const navigate = useNavigate();
 
   const dispatch = useDispatch();

@@ -1,5 +1,4 @@
 export * from "./button/button";
-export * from "./confirmation-modal/confirmation-modal";
 export * from "./helmet/helmet";
 export * from "./input/input";
 export * from "./loader/dot/dot";
@@ -12,3 +11,4 @@ export * from "./select/select";
 export * from "./skeleton/skeleton";
 export * from "./table/table";
 export * from "./textarea/textarea";
+export * from "./login-modal/login-modal";

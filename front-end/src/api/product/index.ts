@@ -11,3 +11,11 @@ export const GETProductList = async (request: IProductRequest) => {
   });
   return result?.data;
 };
+
+export const GETProductDetail = async (id: string) => {
+  const result = await requestToServer<IResponse<IProduct>>({
+    method: "GET",
+    url: `/v1/product/${id}`,
+  });
+  return result?.data;
+};

@@ -6,10 +6,8 @@ import { IButtonProps } from "./types";
 export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
   (
     {
-      size = "medium",
       variant = "primary",
       className,
-      colorType = "info",
       children,
       onClick,
       disabled = false,
@@ -22,7 +20,7 @@ export const Button = forwardRef<HTMLButtonElement, IButtonProps>(
       <ButtonContainer
         role="button"
         ref={ref}
-        className={`${size} ${variant} ${colorType} ${disabled && "disabled"} ${className || ""}`}
+        className={`${variant} ${disabled && "disabled"} ${className || ""}`}
         disabled={isLoading || disabled}
         onClick={() => (isLoading ? {} : onClick?.())}
         type={type}

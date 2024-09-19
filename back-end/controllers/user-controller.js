@@ -110,15 +110,15 @@ const registerUser = async (req, res) => {
       expiresIn: "365d",
     });
 
-    const formattedPhone = phone.startsWith("0")
-      ? `+98${phone.slice(1)}`
-      : phone;
+    // const formattedPhone = phone.startsWith("0")
+    //   ? `+98${phone.slice(1)}`
+    //   : phone;
 
-    await client.messages.create({
-      body: `سلام ${name} عزیز، به ${process.env.SHOPPING_NAME} خوش آمدید.`,
-      from: process.env.TWILIO_PHONE_NUMBER,
-      to: formattedPhone,
-    });
+    // await client.messages.create({
+    //   body: `سلام ${name} عزیز، به ${process.env.SHOPPING_NAME} خوش آمدید.`,
+    //   from: process.env.TWILIO_PHONE_NUMBER,
+    //   to: formattedPhone,
+    // });
 
     res.status(201).json({ success: true, token });
   } catch (error) {

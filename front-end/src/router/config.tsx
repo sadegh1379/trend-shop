@@ -2,7 +2,8 @@ import { lazy } from "react";
 
 const NotFoundPage = lazy(() => import("pages/not-found/not-found"));
 const LoginPage = lazy(() => import("pages/login/login"));
-const HomePage = lazy(() => import("pages/main-page/home"));
+const HomePage = lazy(() => import("pages/main-page/home/home"));
+const ProductDetailPage = lazy(() => import("pages/main-page/detail/detail"));
 
 export type routesProps = {
   path: string;
@@ -30,6 +31,14 @@ const routes: routesProps[] = [
       type: "default",
     },
     component: HomePage,
+  },
+  {
+    path: "/:productId",
+    authType: "no-auth",
+    layout: {
+      type: "default",
+    },
+    component: ProductDetailPage,
   },
   {
     path: "/login",

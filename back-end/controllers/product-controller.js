@@ -41,6 +41,20 @@ const getAllProduct = async (req, res) => {
   }
 };
 
+// Get product
+const getProduct = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const product = await productModel.find({ _id: id });
+    console.log(product);
+    res.json({ success: true, data: product[0] });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ success: false, message: "خطا در دریافت محصول" });
+  }
+};
+
 // Remove product
 const removeProduct = async (req, res) => {
   const { id } = req.params;
@@ -114,4 +128,4 @@ const updateProduct = async (req, res) => {
   }
 };
 
-export { addProduct, getAllProduct, removeProduct, updateProduct };
+export { addProduct, getAllProduct, removeProduct, updateProduct, getProduct };

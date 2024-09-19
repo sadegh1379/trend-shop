@@ -2,6 +2,7 @@ import express from "express";
 import {
   addProduct,
   getAllProduct,
+  getProduct,
   removeProduct,
   updateProduct,
 } from "../controllers/product-controller.js";
@@ -20,6 +21,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 productRouter.post("/", upload.single("image"), addProduct);
+productRouter.get("/:id", getProduct);
 productRouter.get("/", getAllProduct);
 productRouter.delete("/:id", removeProduct);
 productRouter.put("/:id", upload.single("image"), updateProduct);

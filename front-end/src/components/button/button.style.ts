@@ -2,13 +2,22 @@ import styled from "styled-components";
 
 export const ButtonContainer = styled.button`
   min-width: 60px;
-  width: 60px;
-  background-color: #104c82;
-  color: #ffffff;
-  border-radius: 8px;
-  border: 1px solid #104c82;
+  width: max-content;
+  color: ${(props) => props.theme.background.orange};
+  border-radius: 20px;
+  border: 2px solid ${(props) => props.theme.background.orange};
   transition: all 0.2s linear;
+  padding: 5px 10px;
 
+  &.primary {
+    border: 2px solid ${(props) => props.theme.background.orange};
+    color: ${(props) => props.theme.background.orange};
+  }
+
+  &.outlined {
+    background-color: ${(props) => props.theme.background.orange};
+    color: ${(props) => props.theme.background.white};
+  }
   .dot {
     background-color: ${(props) => props.theme.background.orange};
   }

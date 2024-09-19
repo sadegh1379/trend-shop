@@ -4,13 +4,13 @@ import { createSlice } from "@reduxjs/toolkit";
 export interface Profile {
   token: string | null;
   userInfo: any | null;
-  seenTours: string[];
+  showLoginModal: boolean;
 }
 
 const initialState: Profile = {
   token: JSON.parse(localStorage.getItem("token") as string) || null,
   userInfo: JSON.parse(localStorage.getItem("user-info") as string) || null,
-  seenTours: JSON.parse(localStorage.getItem("seen-tours") as string) || [],
+  showLoginModal: false,
 };
 
 export const counterSlice = createSlice({
@@ -25,13 +25,11 @@ export const counterSlice = createSlice({
       localStorage.setItem("user-info", JSON.stringify(action.payload));
       state.userInfo = action.payload;
     },
-    addSeenTour: (state, action: PayloadAction<string>) => {
-      if (!state.seenTours.includes(action.payload)) {
-        const seenTours = [...state.seenTours, action.payload];
-        localStorage.setItem("seen-tours", JSON.stringify(seenTours));
-        state.seenTours = seenTours;
-      }
+
+    changeShowLoginModal: (state, action: PayloadAction<boolean>) => {
+      state.showLoginModal = action.payload;
     },
+
     onLogout: (state) => {
       localStorage.removeItem("token");
       localStorage.removeItem("user-info");
@@ -41,7 +39,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { changeToken, onLogout, changeUserInfo, addSeenTour } =
+export const { changeToken, onLogout, changeUserInfo, changeShowLoginModal } =
   counterSlice.actions;
 
 export default counterSlice.reducer;
