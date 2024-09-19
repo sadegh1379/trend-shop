@@ -7,4 +7,8 @@ interface IProduct {
   category: string;
 }
 
-export type { IProduct };
+interface IProductRequest {
+  categoryId?: string;
+}
+
+export type { IProduct, IProductRequest };

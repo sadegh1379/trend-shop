@@ -9,6 +9,7 @@ import { changeProducts } from "state-manager/reducer/product";
 import { RootState } from "state-manager/store";
 import { ProductCart } from "./components";
 import { HomePageContainer } from "./css/home-page";
+import { RingLoader } from "components";
 
 interface HomePageProps {}
 
@@ -19,11 +20,23 @@ const HomePage: FC<HomePageProps> = () => {
   const [categories, setCategories] = useState<ICategory[]>([]);
 
   useEffect(() => {
-    GETProductList().then((res) => {
+    dispatch(changeProducts(null));
+    GETProductList({ categoryId: category }).then((res) => {
       dispatch(changeProducts(res));
     });
+  }, [category]);
+
+  useEffect(() => {
     GETCategoriesList().then((res) => setCategories(res));
   }, []);
+
+  const handleChangeCategory = (cat: ICategory) => {
+    if (category === cat._id) {
+      setCategory("");
+    } else {
+      setCategory(cat._id);
+    }
+  };
 
   return (
     <HomePageContainer>
@@ -38,7 +51,7 @@ const HomePage: FC<HomePageProps> = () => {
           {categories?.map((cat) => (
             <span
               key={cat._id}
-              onClick={() => setCategory(cat._id)}
+              onClick={() => handleChangeCategory(cat)}
               className={`category ${category === cat._id && "active"}`}
             >
               {cat.name}
@@ -49,6 +62,8 @@ const HomePage: FC<HomePageProps> = () => {
 
       {/* products */}
       <h3 className="text-right mb-2 mt-4">محصولات</h3>
+
+      {productsList === null && <RingLoader />}
       <div className="product_container">
         <Fade triggerOnce duration={200} cascade>
           {productsList?.map((product) => (
