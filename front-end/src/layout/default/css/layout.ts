@@ -7,5 +7,6 @@ export const LayoutContainer = styled.div`
 
   .content {
     flex: 1;
+    padding: 12px;
   }
 `;
