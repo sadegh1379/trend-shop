@@ -8,17 +8,52 @@ import { useSelector } from "react-redux";
 import { RootState } from "state-manager/store";
 import { Button, RingLoader } from "components";
 import { SlSizeFullscreen } from "react-icons/sl";
+import { useDispatch } from "react-redux";
+import {
+  addToCart,
+  changeShowLoginModal,
+  changeUserCart,
+  removeFromCart,
+} from "state-manager/reducer/profile";
+import { toast } from "react-toastify";
+import { IoIosAddCircle } from "react-icons/io";
+import { IoRemoveCircleSharp } from "react-icons/io5";
+import { DELETEUserCartItem, GETUserCart, POSTUserCart } from "api/user";
 
 interface ProductDetailProps {}
 
 const ProductDetail: FC<ProductDetailProps> = () => {
   const { productId } = useParams();
+  const dispatch = useDispatch();
   const { assetsUrl } = useSelector((state: RootState) => state.product);
+  const { token, cartItems } = useSelector((state: RootState) => state.profile);
   const [product, setProduct] = useState<IProduct | null>(null);
 
   useEffect(() => {
     GETProductDetail(productId!).then((res) => setProduct(res));
-  }, [productId]);
+    if (token) {
+      GETUserCart().then((res) => dispatch(changeUserCart(res)));
+    }
+  }, [productId, token]);
+
+  const handleAddToCart = () => {
+    if (token) {
+      POSTUserCart(productId!).then((res) => {
+        dispatch(addToCart(productId!));
+      });
+    } else {
+      toast.warning("لطفا اول وارد شوید.");
+      dispatch(changeShowLoginModal(true));
+    }
+  };
+
+  const handleRemoveFromCart = () => {
+    DELETEUserCartItem(productId!).then(() => {
+      dispatch(removeFromCart(productId!));
+    });
+  };
+
+  console.log(cartItems);
 
   if (!product) return <RingLoader />;
 
@@ -33,9 +68,25 @@ const ProductDetail: FC<ProductDetailProps> = () => {
         <div className="right_section">
           <p className="title">{product.name}</p>
         </div>
-        <div className="left_section">
-          <Button onClick={() => {}}>اضافه کردن به سبد خرید</Button>
-        </div>
+        {cartItems[productId!] ? (
+          <div className="detail_tools">
+            <IoIosAddCircle
+              onClick={handleAddToCart}
+              size={30}
+              className="detail_tools_add"
+            />
+            <p>{cartItems[productId!]}</p>
+            <IoRemoveCircleSharp
+              onClick={handleRemoveFromCart}
+              size={30}
+              className="detail_tools_remove"
+            />
+          </div>
+        ) : (
+          <div className="left_section">
+            <Button onClick={handleAddToCart}>اضافه کردن به سبد خرید</Button>
+          </div>
+        )}
       </div>
       <p className="description">{product.description}</p>
       <p className="price">{product.price.toLocaleString()} تومان</p>

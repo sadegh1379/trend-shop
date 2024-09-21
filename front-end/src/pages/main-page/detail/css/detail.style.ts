@@ -26,6 +26,32 @@ export const ProductDetailContainer = styled.div`
     .title {
       font-size: 16px;
     }
+
+    .detail_tools {
+      background-color: #fefefe;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 5px;
+      border: 2px solid ${(props) => props.theme.text.orange};
+      border-radius: 25px;
+      padding: 2px 5px;
+      width: 80px;
+      p {
+        font-size: 18px;
+        padding-top: 4px;
+      }
+
+      .detail_tools_add {
+        color: green;
+        cursor: pointer;
+      }
+
+      .detail_tools_remove {
+        color: red;
+        cursor: pointer;
+      }
+    }
   }
   .description {
     font-size: 14px;

@@ -8,4 +8,8 @@ interface IUser {
   };
 }
 
-export type { IUser };
+interface IUserCart {
+  [key: string]: number;
+}
+
+export type { IUser, IUserCart };

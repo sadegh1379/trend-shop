@@ -1,6 +1,6 @@
 import type { PayloadAction } from "@reduxjs/toolkit";
 import { createSlice } from "@reduxjs/toolkit";
-import { IUser } from "api/user/types";
+import { IUser, IUserCart } from "api/user/types";
 
 export interface Profile {
   token: string | null;
@@ -43,21 +43,50 @@ export const counterSlice = createSlice({
       state.showLoginModal = action.payload;
     },
 
-    addToCart: (state, action: PayloadAction<boolean>) => {
-      // start from this
-      state.showLoginModal = action.payload;
+    addToCart: (state, action: PayloadAction<string>) => {
+      const updatedCart = { ...state.cartItems };
+      updatedCart[action.payload] = updatedCart[action.payload]
+        ? updatedCart[action.payload] + 1
+        : 1;
+      localStorage.setItem("user-cart", JSON.stringify(updatedCart));
+      state.cartItems = updatedCart;
+    },
+
+    removeFromCart: (state, action: PayloadAction<string>) => {
+      const updatedCart = { ...state.cartItems };
+      if (updatedCart[action.payload] > 1) {
+        updatedCart[action.payload] -= 1;
+      } else {
+        delete updatedCart[action.payload];
+      }
+      localStorage.setItem("user-cart", JSON.stringify(updatedCart));
+      state.cartItems = updatedCart;
+    },
+
+    changeUserCart: (state, action: PayloadAction<IUserCart>) => {
+      localStorage.setItem("user-cart", JSON.stringify(action.payload));
+      state.cartItems = action.payload;
     },
 
     onLogout: (state) => {
       localStorage.removeItem("token");
       localStorage.removeItem("user-info");
+      localStorage.removeItem("user-cart");
       state.token = null;
       state.userInfo = null;
+      state.cartItems = {};
     },
   },
 });
 
-export const { changeToken, onLogout, changeUserInfo, changeShowLoginModal } =
-  counterSlice.actions;
+export const {
+  changeToken,
+  onLogout,
+  changeUserInfo,
+  changeShowLoginModal,
+  addToCart,
+  changeUserCart,
+  removeFromCart,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

@@ -21,22 +21,18 @@ const RequireAuth: FC<RequireAuthProps> = ({ children }) => {
   const { token: userToken } = useSelector((state: RootState) => state.profile);
   const dispatch = useDispatch();
   const location = useLocation();
-  let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
-  const token = searchParams.get("token") || userToken;
 
   useEffect(() => {
-    if (token && token !== userToken) {
-      dispatch(changeToken(token));
-      searchParams.delete("token");
-      setSearchParams(searchParams);
-    } else if (!token) {
+    if (userToken) {
+      dispatch(changeToken(userToken));
+    } else if (!userToken) {
       toast.warn("شما خارج شدید.");
       navigate(`/login?callbackUrl=${location.pathname}`, { replace: true });
     }
-  }, [token, userToken, searchParams, location.pathname]);
+  }, [userToken, location.pathname]);
 
-  if (!token) return <PageLoader />;
+  if (!userToken) return <PageLoader />;
 
   return <>{children}</>;
 };

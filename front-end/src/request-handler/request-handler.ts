@@ -34,6 +34,8 @@ const addInterceptors = (instance: AxiosInstance) => {
             break;
           case 401:
             toast.error(data.message || "دسترسی غیرمجاز");
+            localStorage.removeItem("token");
+            localStorage.removeItem("user-info");
             break;
           case 404:
             toast.error(data.message || "منبع یافت نشد");
