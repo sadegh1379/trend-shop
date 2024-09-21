@@ -28,7 +28,7 @@ export const CartContainer = styled.div`
     }
 
     .cart_bottom {
-      margin-top: 80px;
+      margin-top: 30px;
       display: flex;
       flex-direction: column-reverse;
       justify-content: space-between;

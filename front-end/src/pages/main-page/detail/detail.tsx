@@ -1,13 +1,16 @@
 import { useEffect, useState, type FC } from "react";
 import { useParams } from "react-router";
-import { ProductDetailContainer } from "./css/detail.style";
+import {
+  ProductDetailContainer,
+  FullScreenImageContainer,
+} from "./css/detail.style";
 import { GETProductDetail } from "api/product";
 import { IProduct } from "api/product/types";
 import { Header } from "./components";
 import { useSelector } from "react-redux";
 import { RootState } from "state-manager/store";
 import { Button, RingLoader } from "components";
-import { SlSizeFullscreen } from "react-icons/sl";
+import { SlSizeFullscreen, SlSizeActual } from "react-icons/sl"; // Import resize icon
 import { useDispatch } from "react-redux";
 import {
   addToCart,
@@ -28,6 +31,7 @@ const ProductDetail: FC<ProductDetailProps> = () => {
   const { assetsUrl } = useSelector((state: RootState) => state.product);
   const { token, cartItems } = useSelector((state: RootState) => state.profile);
   const [product, setProduct] = useState<IProduct | null>(null);
+  const [isFullScreen, setIsFullScreen] = useState(false); // Track full-screen state
 
   useEffect(() => {
     GETProductDetail(productId!).then((res) => setProduct(res));
@@ -53,7 +57,9 @@ const ProductDetail: FC<ProductDetailProps> = () => {
     });
   };
 
-  console.log(cartItems);
+  const handleFullScreenImage = () => {
+    setIsFullScreen(!isFullScreen); // Toggle full-screen state
+  };
 
   if (!product) return <RingLoader />;
 
@@ -61,9 +67,36 @@ const ProductDetail: FC<ProductDetailProps> = () => {
     <ProductDetailContainer>
       <Header />
       <div className="image_container">
-        <img className="product_img" src={assetsUrl + product?.image} alt="" />
-        <SlSizeFullscreen className="full_screen" size={20} />
+        <img
+          className="product_img"
+          src={assetsUrl + product?.image}
+          alt=""
+          onClick={handleFullScreenImage} // Open image in full screen
+        />
+        <SlSizeFullscreen
+          className="full_screen"
+          size={20}
+          onClick={handleFullScreenImage} // Open full-screen mode on icon click
+        />
       </div>
+
+      {/* Full-screen image overlay */}
+      {isFullScreen && (
+        <FullScreenImageContainer>
+          <img
+            className="full_screen_img"
+            src={assetsUrl + product?.image}
+            alt=""
+            onClick={handleFullScreenImage} // Exit full-screen on image click
+          />
+          <SlSizeActual
+            className="resize_icon"
+            size={30}
+            onClick={handleFullScreenImage} // Exit full-screen on icon click
+          />
+        </FullScreenImageContainer>
+      )}
+
       <div className="product_info">
         <div className="right_section">
           <p className="title">{product.name}</p>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.background.greyDark};
+  border-top: 1px solid ${({ theme }) => theme.background.greyDark};
 
   text-align: center;
   padding: 0 0;
@@ -11,6 +11,5 @@ export const FooterContainer = styled.div`
     font-weight: 500;
     font-size: 10px;
     margin-top: 5px;
-    color: ${({ theme }) => theme.text.white};
   }
 `;

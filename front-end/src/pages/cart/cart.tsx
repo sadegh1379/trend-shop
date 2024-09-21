@@ -1,4 +1,4 @@
-import { useEffect, useState, type FC } from "react";
+import { useEffect, useMemo, useState, type FC } from "react";
 import { CartContainer } from "./css/cart.style";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router";
@@ -45,6 +45,19 @@ const Cart: FC<CartProps> = () => {
       })
       .finally(() => setIsRemoving(""));
   };
+
+  const totalAmount = useMemo(() => {
+    let total = 0;
+    for (const item in cartItems) {
+      if (cartItems[item] > 0) {
+        let itemInfo = productsList?.find((product) => product._id === item);
+        if (itemInfo) {
+          total += itemInfo.price * cartItems[item];
+        }
+      }
+    }
+    return total.toLocaleString();
+  }, [cartItems, productsList]);
 
   if (isLoading) return <RingLoader />;
 
@@ -105,20 +118,19 @@ const Cart: FC<CartProps> = () => {
               <div>
                 <div className="cart_total_details">
                   <p>جمع فرعی</p>
-                  <p>{}</p>
+                  <p>{totalAmount} تومان</p>
                 </div>
                 <hr />
                 <div className="cart_total_details">
                   <p>کارمزد</p>
-                  <p>{2}</p>
+                  <p>{0}</p>
                 </div>
                 <hr />
                 <div className="cart_total_details">
                   <b>جمع</b>
-                  <b>{}</b>
+                  <b>{totalAmount}</b>
                 </div>
               </div>
-              <button onClick={() => navigate("/order")}>ادامه خرید</button>
             </div>
             {/* <div className="cart_promocode">
               <div>
@@ -130,7 +142,7 @@ const Cart: FC<CartProps> = () => {
               </div>
             </div> */}
           </div>
-          <Button className="w-100" variant="outlined">
+          <Button className="w-100 mt-5" variant="outlined">
             پرداخت
           </Button>
         </div>

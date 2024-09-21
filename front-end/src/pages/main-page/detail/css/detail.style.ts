@@ -6,6 +6,7 @@ export const ProductDetailContainer = styled.div`
     .product_img {
       width: 100%;
       border-radius: 10px;
+      cursor: pointer; /* Allow clicking on the image to open full screen */
     }
 
     .full_screen {
@@ -60,5 +61,32 @@ export const ProductDetailContainer = styled.div`
   .price {
     color: ${(props) => props.theme.text.orange};
     font-size: 20px;
+  }
+`;
+
+export const FullScreenImageContainer = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+
+  .full_screen_img {
+    max-width: 90vw;
+    max-height: 90vh;
+    cursor: pointer; /* Allow clicking on the image to close full screen */
+  }
+
+  .resize_icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: white;
+    cursor: pointer;
   }
 `;
