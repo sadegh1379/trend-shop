@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
     max-width: 430px;
+    position: relative;
     margin: 0 auto;
     background-color: #efefef;
   }

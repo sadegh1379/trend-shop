@@ -7,7 +7,8 @@ export const LoginModalContainer = styled.div`
     width: 100%;
     height: 100%;
     background-color: #00000090;
-    display: grid;
+
+    /* display: grid; */
 
     .login_modal_container {
       place-self: center;
@@ -21,6 +22,7 @@ export const LoginModalContainer = styled.div`
       border-radius: 8px;
       font-size: 14px;
       animation: fadeIn 0.5s;
+      margin: 50px auto;
 
       .login_modal_title {
         display: flex;

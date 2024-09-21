@@ -1,15 +1,15 @@
+import { POSTUserLogin, POSTUserRegister } from "api/auth";
 import { FC, useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { RootState } from "state-manager/store";
-import { requestToServer } from "../../request-handler";
-import { LoginModalContainer } from "./login-model.style";
 import {
   changeShowLoginModal,
   changeToken,
+  changeUserInfo,
 } from "state-manager/reducer/profile";
-import { POSTUserLogin, POSTUserRegister } from "api/auth";
+import { LoginModalContainer } from "./login-model.style";
+import { GETUserInfo } from "api/user";
 
 const LoginModal: FC = () => {
   const dispatch = useDispatch();
@@ -32,6 +32,7 @@ const LoginModal: FC = () => {
       POSTUserRegister({ name, password, phone })
         .then((res) => {
           dispatch(changeToken(res.token));
+          getUserInfo();
           toast.success("ثبت نام با موفقیت انجام شد");
           handleCloseModal();
           setName("");
@@ -43,6 +44,7 @@ const LoginModal: FC = () => {
       POSTUserLogin({ phone, password })
         .then((res) => {
           dispatch(changeToken(res.token));
+          getUserInfo();
           toast.success("ورود با موفقیت انجام شد");
           handleCloseModal();
           setName("");
@@ -52,6 +54,12 @@ const LoginModal: FC = () => {
         })
         .finally(() => setLoading(false));
     }
+  };
+
+  const getUserInfo = () => {
+    GETUserInfo().then((res) => {
+      dispatch(changeUserInfo(res));
+    });
   };
 
   const handleCloseModal = () => {

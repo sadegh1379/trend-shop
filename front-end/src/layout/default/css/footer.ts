@@ -2,9 +2,10 @@ import styled from "styled-components";
 
 export const FooterContainer = styled.div`
   width: 100%;
-  background-color: ${({ theme }) => theme.background.orange};
+  background-color: ${({ theme }) => theme.background.greyDark};
+
   text-align: center;
-  padding: 9px 0;
+  padding: 0 0;
 
   .title {
     font-weight: 500;

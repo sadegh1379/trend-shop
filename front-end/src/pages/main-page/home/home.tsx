@@ -40,7 +40,7 @@ const HomePage: FC<HomePageProps> = () => {
 
   return (
     <HomePageContainer>
-      <Fade className="banner">
+      <Fade triggerOnce className="banner">
         <img className="banner_img" src={BannerImg} alt="" />
       </Fade>
 
@@ -65,7 +65,7 @@ const HomePage: FC<HomePageProps> = () => {
 
       {productsList === null && <RingLoader />}
       <div className="product_container">
-        <Fade triggerOnce duration={200} cascade>
+        <Fade triggerOnce duration={200}>
           {productsList?.map((product) => (
             <ProductCart product={product} key={product._id} />
           ))}

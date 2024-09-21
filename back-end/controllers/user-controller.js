@@ -127,4 +127,24 @@ const registerUser = async (req, res) => {
   }
 };
 
-export { loginUser, registerUser };
+const getUser = async (req, res) => {
+  const { userId } = req.body;
+
+  try {
+    const user = await userModel.findById(userId);
+    if (!user) {
+      return res
+        .status(400)
+        .json({ success: false, message: "کاربر یافت نشد." });
+    }
+    console.log(user);
+    res.json({ success: true, data: user });
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({ success: false, message: "خطا در پیدا کردن کاربر." });
+  }
+};
+
+export { loginUser, registerUser, getUser };
