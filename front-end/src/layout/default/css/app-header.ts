@@ -5,6 +5,12 @@ export const AppHeaderContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   background-color: #ffffff;
+  border-bottom: 1px solid ${(props) => props.theme.text.orange};
+  padding-bottom: 5px;
+
+  .dropdown-toggle::after {
+    display: none;
+  }
   .app_logo {
     width: 150px;
   }

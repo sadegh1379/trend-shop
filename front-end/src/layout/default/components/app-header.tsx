@@ -4,12 +4,14 @@ import { AppLogoImg } from "assets/images";
 import { CgProfile } from "react-icons/cg";
 import { LuShoppingCart } from "react-icons/lu";
 import { useDispatch, useSelector } from "react-redux";
-import { Badge, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { changeShowLoginModal, onLogout } from "state-manager/reducer/profile";
 import { RootState } from "state-manager/store";
+import { useNavigate } from "react-router";
 
 const AppHeader: FC = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { token, userInfo, cartItems } = useSelector(
     (state: RootState) => state.profile
   );
@@ -44,9 +46,19 @@ const AppHeader: FC = () => {
           className="header_icon pointer"
         />
       )}
-      <img className="app_logo" src={AppLogoImg} alt="logo" />
+
+      <img
+        onClick={() => navigate("/")}
+        className="app_logo pointer"
+        src={AppLogoImg}
+        alt="logo"
+      />
       <span className="cart_badge_container">
-        <LuShoppingCart className="header_icon pointer" size={30} />
+        <LuShoppingCart
+          onClick={() => navigate("/cart")}
+          className="header_icon pointer"
+          size={30}
+        />
         {Object.keys(cartItems).length > 0 && (
           <span className="badge">{Object.keys(cartItems).length}</span>
         )}

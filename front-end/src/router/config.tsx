@@ -4,6 +4,7 @@ const NotFoundPage = lazy(() => import("pages/not-found/not-found"));
 const LoginPage = lazy(() => import("pages/login/login"));
 const HomePage = lazy(() => import("pages/main-page/home/home"));
 const ProductDetailPage = lazy(() => import("pages/main-page/detail/detail"));
+const CartPage = lazy(() => import("pages/cart/cart"));
 
 export type routesProps = {
   path: string;
@@ -39,6 +40,14 @@ const routes: routesProps[] = [
       type: "default",
     },
     component: ProductDetailPage,
+  },
+  {
+    path: "/cart",
+    authType: "no-auth",
+    layout: {
+      type: "default",
+    },
+    component: CartPage,
   },
   {
     path: "/login",

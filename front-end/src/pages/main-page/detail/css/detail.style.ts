@@ -36,7 +36,6 @@ export const ProductDetailContainer = styled.div`
       border: 2px solid ${(props) => props.theme.text.orange};
       border-radius: 25px;
       padding: 2px 5px;
-      width: 80px;
       p {
         font-size: 18px;
         padding-top: 4px;
