@@ -2,6 +2,7 @@ import orderModel from "../models/order-model.js";
 import userModel from "../models/user-model.js";
 
 const placeOrder = async (req, res) => {
+  let image_filename = `${req.file.filename}`;
   const { userId, items, amount, address } = req.body;
   try {
     const newOrder = new orderModel({
@@ -9,6 +10,7 @@ const placeOrder = async (req, res) => {
       items,
       amount,
       address,
+      paymentImage: image_filename,
     });
 
     await newOrder.save();
@@ -35,9 +37,10 @@ const getOrderList = async (req, res) => {
 };
 
 const updateOrder = async (req, res) => {
+  let image_filename = `${req.file.filename}`;
   const userId = req.body.userId;
   const { orderId } = req.params;
-  const { status, address, items, amount } = req.body;
+  const { status, address, items, amount, paymentImage } = req.body;
 
   try {
     const order = await orderModel.findOne({ _id: orderId, userId });
@@ -52,6 +55,7 @@ const updateOrder = async (req, res) => {
     order.address = address || order.address;
     order.items = items || order.items;
     order.amount = amount || order.amount;
+    order.paymentImage = paymentImage || order.paymentImage;
 
     const updatedOrder = await order.save();
 

@@ -35,7 +35,9 @@ const AppHeader: FC = () => {
           <Dropdown.Menu>
             <Dropdown.ItemText>{userInfo?.name}</Dropdown.ItemText>
             <Dropdown.Divider />
-            <Dropdown.Item>سفارشات</Dropdown.Item>
+            <Dropdown.Item onClick={() => navigate("/order")}>
+              سفارشات
+            </Dropdown.Item>
             <Dropdown.Item onClick={handleLogout}>خروج</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>

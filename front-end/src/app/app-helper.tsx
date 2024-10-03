@@ -28,7 +28,7 @@ const RequireAuth: FC<RequireAuthProps> = ({ children }) => {
       dispatch(changeToken(userToken));
     } else if (!userToken) {
       toast.warn("شما خارج شدید.");
-      navigate(`/login?callbackUrl=${location.pathname}`, { replace: true });
+      navigate(`/`, { replace: true });
     }
   }, [userToken, location.pathname]);
 

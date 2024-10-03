@@ -35,7 +35,7 @@ const Cart: FC<CartProps> = () => {
       GETUserCart().then((res) => dispatch(changeUserCart(res)));
     }
     setIsLoading(false);
-  }, []);
+  }, [token]);
 
   const handleRemoveFromCart = (id: string) => {
     setIsRemoving(id);
@@ -142,9 +142,15 @@ const Cart: FC<CartProps> = () => {
               </div>
             </div> */}
           </div>
-          <Button className="w-100 mt-5" variant="outlined">
-            پرداخت
-          </Button>
+          {Object.keys(cartItems).length > 0 ? (
+            <Button
+              onClick={() => navigate("/order")}
+              className="w-100 mt-5"
+              variant="outlined"
+            >
+              پرداخت
+            </Button>
+          ) : null}
         </div>
       ) : (
         <div className="d-flex flex-column gap-1 mt-5 justify-content-center align-items-center">
