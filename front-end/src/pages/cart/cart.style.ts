@@ -14,6 +14,8 @@ export const CartContainer = styled.div`
       display: grid;
       grid-template-columns: 1fr 1.3fr 1fr 0.5fr 1fr 0.5fr;
       align-items: center;
+      text-align: center;
+
       color: grey;
       font-size: 12px;
     }

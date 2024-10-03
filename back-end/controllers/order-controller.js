@@ -3,11 +3,28 @@ import userModel from "../models/user-model.js";
 
 const placeOrder = async (req, res) => {
   let image_filename = `${req.file.filename}`;
-  const { userId, items, amount, address } = req.body;
+  const {
+    userId,
+    status,
+    address,
+    items,
+    amount,
+    phone,
+    firstName,
+    lastName,
+    email,
+    zipCode,
+  } = req.body;
   try {
     const newOrder = new orderModel({
       userId,
       items,
+      status,
+      phone,
+      email,
+      zipCode,
+      firstName,
+      lastName,
       amount,
       address,
       paymentImage: image_filename,
@@ -40,7 +57,18 @@ const updateOrder = async (req, res) => {
   let image_filename = `${req.file.filename}`;
   const userId = req.body.userId;
   const { orderId } = req.params;
-  const { status, address, items, amount, paymentImage } = req.body;
+  const {
+    status,
+    address,
+    items,
+    amount,
+    paymentImage,
+    phone,
+    firstName,
+    lastName,
+    email,
+    zipCode,
+  } = req.body;
 
   try {
     const order = await orderModel.findOne({ _id: orderId, userId });
@@ -55,7 +83,12 @@ const updateOrder = async (req, res) => {
     order.address = address || order.address;
     order.items = items || order.items;
     order.amount = amount || order.amount;
-    order.paymentImage = paymentImage || order.paymentImage;
+    order.phone = phone || order.phone;
+    order.firstName = firstName || order.firstName;
+    order.lastName = lastName || order.lastName;
+    order.zipCode = zipCode || order.zipCode;
+    order.email = email || order.email;
+    order.paymentImage = paymentImage || image_filename;
 
     const updatedOrder = await order.save();
 

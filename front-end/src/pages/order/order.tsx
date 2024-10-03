@@ -1,5 +1,5 @@
 import { ChangeEventHandler, useEffect, useMemo, useState, FC } from "react";
-import { OrderContainer } from "./css/order.style";
+import { OrderContainer } from "./order.style";
 import { toast } from "react-toastify";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router";
@@ -12,6 +12,7 @@ import { changeProducts } from "state-manager/reducer/product";
 import { changeUserCart } from "state-manager/reducer/profile";
 import { POSTOrder } from "api/order";
 import { GETUserCart } from "api/user";
+import { useSearchParams } from "react-router-dom";
 
 interface OrderProps {}
 
@@ -122,6 +123,7 @@ const Order: FC<OrderProps> = () => {
         });
         setPreviewImage(null);
         toast.success("سفارش با موفقیت ثبت شد.");
+        navigate("/orders");
       });
     }
   };

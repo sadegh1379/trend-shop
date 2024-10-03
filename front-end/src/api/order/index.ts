@@ -8,3 +8,19 @@ export const POSTOrder = async (data: FormData) => {
   });
   return result;
 };
+
+export const GETUserOrders = async () => {
+  const result = await requestToServer<{ data: IOrder[] }>({
+    method: "GET",
+    url: `/v1/order`,
+  });
+  return result?.data;
+};
+
+export const GETUserOrderById = async (orderId: string) => {
+  const result = await requestToServer<{ data: IOrder }>({
+    method: "GET",
+    url: `/v1/order/${orderId}`,
+  });
+  return result?.data;
+};

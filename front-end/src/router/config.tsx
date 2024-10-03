@@ -1,11 +1,11 @@
 import { lazy } from "react";
 
 const NotFoundPage = lazy(() => import("pages/not-found/not-found"));
-const LoginPage = lazy(() => import("pages/login/login"));
 const HomePage = lazy(() => import("pages/main-page/home/home"));
 const ProductDetailPage = lazy(() => import("pages/main-page/detail/detail"));
 const CartPage = lazy(() => import("pages/cart/cart"));
 const OrderPage = lazy(() => import("pages/order/order"));
+const OrdersPage = lazy(() => import("pages/orders/orders"));
 
 export type routesProps = {
   path: string;
@@ -59,13 +59,12 @@ const routes: routesProps[] = [
     component: OrderPage,
   },
   {
-    path: "/login",
-    authType: "no-auth",
+    path: "/orders",
+    authType: "auth",
     layout: {
       type: "default",
-      showFooter: false,
     },
-    component: LoginPage,
+    component: OrdersPage,
   },
 ];
 

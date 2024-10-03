@@ -1,5 +1,5 @@
-import { GETCategoriesList } from "api/gategory";
-import { ICategory } from "api/gategory/types";
+import { GETCategoriesList } from "api/category";
+import { ICategory } from "api/category/types";
 import { GETProductList } from "api/product";
 import { BannerImg } from "assets/images";
 import { useEffect, useState, type FC } from "react";

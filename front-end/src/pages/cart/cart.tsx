@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, type FC } from "react";
-import { CartContainer } from "./css/cart.style";
+import { CartContainer } from "./cart.style";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router";
 import { useSelector } from "react-redux";
