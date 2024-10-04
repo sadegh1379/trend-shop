@@ -1,11 +1,10 @@
 import { GETUserOrders } from "api/order";
 import { RingLoader } from "components";
+import moment from "moment-jalaali";
 import { useEffect, useState, type FC } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router";
 import { CartContainer } from "./orders.style";
-import moment from "moment-jalaali";
-import { Link } from "react-router-dom";
 
 interface CartProps {}
 
@@ -35,7 +34,7 @@ const Cart: FC<CartProps> = () => {
       <div className="cart">
         <div className="cart_items">
           <div className="cart_items_title">
-            <p>جمع کل (تومان)</p>
+            <p>جمع کل ( تومان )</p>
             <p>نام</p>
             <p>تاریخ</p>
             <p>وضعیت</p>
@@ -53,7 +52,8 @@ const Cart: FC<CartProps> = () => {
                       ? "در حال پردازش"
                       : "تحویل داده شده"}
                   </p>
-                  <Link to={`/order?orderId=${order._id}`}>جزییات</Link>
+                  <p>-</p>
+                  {/* <Link to={`/order?orderId=${order._id}`}>جزییات</Link> */}
                 </div>
                 <hr />
               </div>

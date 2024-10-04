@@ -3,6 +3,7 @@ interface IUser {
   email: string;
   phone: string;
   password: string;
+  isAdmin: boolean;
   cartData: {
     [key: string]: number;
   };

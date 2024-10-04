@@ -42,7 +42,7 @@ const loginUser = async (req, res) => {
     }
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "1h",
+      expiresIn: "365d",
     });
 
     res.status(200).json({ success: true, token });
@@ -54,7 +54,7 @@ const loginUser = async (req, res) => {
 
 // register user
 const registerUser = async (req, res) => {
-  const { name, password, phone, email } = req.body;
+  const { name, password, phone, email, isAdmin } = req.body;
 
   if (!name) {
     return res
@@ -96,11 +96,11 @@ const registerUser = async (req, res) => {
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-
     const newUser = new userModel({
       name,
       email,
       phone,
+      isAdmin: isAdmin ? true : false,
       password: hashedPassword,
     });
 

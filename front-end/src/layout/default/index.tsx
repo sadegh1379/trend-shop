@@ -8,14 +8,15 @@ import { LoginModal } from "components";
 const DefaultLayout: FC<{
   children: React.ReactNode;
   showFooter?: boolean;
-}> = ({ children, showFooter }) => {
+  hideHeader?: boolean;
+}> = ({ children, showFooter, hideHeader }) => {
   const { showLoginModal } = useSelector((state: RootState) => state.profile);
 
   return (
     <LayoutContainer>
       {showLoginModal && <LoginModal />}
       <div className="content">
-        <AppHeader />
+        {!hideHeader && <AppHeader />}
         {children}
       </div>
       {showFooter && <Footer />}

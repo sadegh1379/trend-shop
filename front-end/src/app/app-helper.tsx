@@ -47,15 +47,21 @@ const RoutesLayoutHandler = ({
   type,
   children,
   showFooter = true,
+  hideHeader = false,
 }: {
   type: routesProps["layout"]["type"];
   hideSettingMenu?: boolean;
   children: React.ReactNode;
   showFooter?: boolean;
+  hideHeader?: boolean;
 }) => {
   switch (type) {
     case "default":
-      return <DefaultLayout showFooter={showFooter}>{children}</DefaultLayout>;
+      return (
+        <DefaultLayout showFooter={showFooter} hideHeader={hideHeader}>
+          {children}
+        </DefaultLayout>
+      );
     case "core-admin":
       return <CoreAdminLayout>{children}</CoreAdminLayout>;
     default:

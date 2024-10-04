@@ -7,12 +7,16 @@ const CartPage = lazy(() => import("pages/cart/cart"));
 const OrderPage = lazy(() => import("pages/order/order"));
 const OrdersPage = lazy(() => import("pages/orders/orders"));
 
+// admin routes
+const AdminPage = lazy(() => import("pages/admin/main-page/admin"));
+
 export type routesProps = {
   path: string;
   component: React.FC;
   layout: {
     type: "default" | "core-admin";
     showFooter?: boolean;
+    hideHeader?: boolean;
   };
   authType: "no-auth" | "auth";
 };
@@ -65,6 +69,15 @@ const routes: routesProps[] = [
       type: "default",
     },
     component: OrdersPage,
+  },
+  {
+    path: "/admin",
+    authType: "no-auth",
+    layout: {
+      type: "default",
+      hideHeader: true,
+    },
+    component: AdminPage,
   },
 ];
 
