@@ -13,10 +13,7 @@ export const NotFoundContainer = styled.div`
     margin-top: 30px;
     font-size: 22px;
   }
-  .notfound_img {
-    max-width: 600px;
-    height: auto;
-  }
+
   @media (max-width: 768px) {
     .notfound_img {
       max-width: 400px;

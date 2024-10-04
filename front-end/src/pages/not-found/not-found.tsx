@@ -11,7 +11,6 @@ const NotFound: React.FC = () => {
 
   return (
     <NotFoundContainer>
-      <img className="notfound_img" src={notFoundImage}></img>
       <p className="notfound_message">
         صفحه مورد <span className="first-step">نظر</span> یافت نشد!
       </p>

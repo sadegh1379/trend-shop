@@ -106,10 +106,10 @@ const LoginModal: FC = () => {
                 ? "ثبت نام"
                 : "ورود"}
           </button>
-          <div className="login_modal_condition">
+          {/* <div className="login_modal_condition">
             <input type="checkbox" required />
             <p>تمام قوانین را خوانده‌ام</p>
-          </div>
+          </div> */}
           {currentState === "Login" ? (
             <p>
               ساخت اکانت جدید؟{" "}

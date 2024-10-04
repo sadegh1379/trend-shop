@@ -5,6 +5,7 @@ export const LayoutContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   position: relative;
+  padding-bottom: 70px;
 
   .content {
     flex: 1;

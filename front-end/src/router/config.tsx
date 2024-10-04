@@ -1,11 +1,15 @@
 import { lazy } from "react";
 
+import CartPage from "pages/cart/cart";
+import OrdersPage from "pages/orders/orders";
+import HomePage from "pages/main-page/home/home";
+import FavoritesPage from "pages/favorites/favorites";
+import ProfilePage from "pages/profile/profile";
+
+// lazy pages
 const NotFoundPage = lazy(() => import("pages/not-found/not-found"));
-const HomePage = lazy(() => import("pages/main-page/home/home"));
 const ProductDetailPage = lazy(() => import("pages/main-page/detail/detail"));
-const CartPage = lazy(() => import("pages/cart/cart"));
 const OrderPage = lazy(() => import("pages/order/order"));
-const OrdersPage = lazy(() => import("pages/orders/orders"));
 
 // admin routes
 const AdminPage = lazy(() => import("pages/admin/main-page/admin"));
@@ -17,6 +21,7 @@ export type routesProps = {
     type: "default" | "core-admin";
     showFooter?: boolean;
     hideHeader?: boolean;
+    hideBottomMenu?: boolean;
   };
   authType: "no-auth" | "auth";
 };
@@ -64,11 +69,27 @@ const routes: routesProps[] = [
   },
   {
     path: "/orders",
-    authType: "auth",
+    authType: "no-auth",
     layout: {
       type: "default",
     },
     component: OrdersPage,
+  },
+  {
+    path: "/profile",
+    authType: "no-auth",
+    layout: {
+      type: "default",
+    },
+    component: ProfilePage,
+  },
+  {
+    path: "/favorites",
+    authType: "no-auth",
+    layout: {
+      type: "default",
+    },
+    component: FavoritesPage,
   },
   {
     path: "/admin",
@@ -76,6 +97,7 @@ const routes: routesProps[] = [
     layout: {
       type: "default",
       hideHeader: true,
+      hideBottomMenu: true,
     },
     component: AdminPage,
   },

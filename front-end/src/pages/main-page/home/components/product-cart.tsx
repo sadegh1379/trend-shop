@@ -15,7 +15,7 @@ const ProductCart: FC<ProductCartProps> = ({ product }) => {
   return (
     <Link to={`/${product._id}`}>
       <ProductCartContainer>
-        <FaRegHeart size={20} className="product_favorite_icon" />
+        {/* <FaRegHeart size={20} className="product_favorite_icon" /> */}
         <img className="product_img" src={assetsUrl + product.image} alt="" />
         <p className="product_title">{product.name}</p>
         <p className="product_description">{product.description}</p>

@@ -3,9 +3,9 @@ import styled from "styled-components";
 export const ProductCartContainer = styled.div`
   position: relative;
   background-color: #fefefe;
-  border-radius: 10px;
+  border-radius: 4px;
   padding: 7px;
-  border: 1px solid ${({ theme }) => theme.text.orange};
+  box-shadow: ${(props) => props.theme.shadow.sm};
   cursor: pointer;
   .product_img {
     border-radius: 10px;
